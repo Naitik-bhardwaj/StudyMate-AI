@@ -43,6 +43,7 @@ npm run dev
 | [`media/ui-polish/login_before.png`](../media/ui-polish/login_before.png) | Prior login card on cream |
 | [`media/ui-polish/dashboard_before.png`](../media/ui-polish/dashboard_before.png) | Prior indigo dashboard + emoji cards |
 | [`media/ui-polish/chat_before.png`](../media/ui-polish/chat_before.png) | Prior chat UI |
+| [`media/ui-polish/dashboard_after.png`](../media/ui-polish/dashboard_after.png) | New dashboard (demo user) |
 | [`media/ui-polish/login_after.png`](../media/ui-polish/login_after.png) | New brand-first login |
 | [`media/ui-polish/login_after_mobile.png`](../media/ui-polish/login_after_mobile.png) | Login at mobile width |
 | [`media/ui-polish/register_after.png`](../media/ui-polish/register_after.png) | New register composition |
