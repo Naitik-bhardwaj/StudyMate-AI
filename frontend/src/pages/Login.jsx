@@ -26,7 +26,21 @@ const Login = () => {
 
   return (
     <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
+      <div className="auth-shell">
+        <aside className="auth-aside">
+          <div>
+            <span className="logo-mark">S</span>
+            <p className="auth-kicker">StudyMate AI</p>
+            <h2>Your desk is ready.</h2>
+            <p>Quizzes, flashcards, notes, and a plan that remembers what you already finished.</p>
+          </div>
+          <ul className="auth-points">
+            <li>Graded quizzes on any topic</li>
+            <li>Flashcards that return when you need them</li>
+            <li>Points, streaks, and a shared leaderboard</li>
+          </ul>
+        </aside>
+        <form className="auth-card" onSubmit={handleSubmit}>
         <h1>Welcome back</h1>
         <p className="auth-subtitle">Log in to continue studying smarter.</p>
 
@@ -45,7 +59,8 @@ const Login = () => {
         <p className="auth-switch">
           Don't have an account? <Link to="/register">Sign up</Link>
         </p>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

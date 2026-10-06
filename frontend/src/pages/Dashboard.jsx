@@ -22,10 +22,23 @@ const Dashboard = () => {
   const accuracy =
     stats.totalQuestions > 0 ? Math.round((stats.totalCorrect / stats.totalQuestions) * 100) : 0;
 
+  const features = [
+    { to: "/chat", mark: "Chat", title: "AI Chat", text: "Ask questions and get instant, clear explanations on any topic." },
+    { to: "/quiz", mark: "Quiz", title: "Quiz Generator", text: "Generate custom quizzes on any subject to test your knowledge." },
+    { to: "/study-plan", mark: "Plan", title: "Study Plan", text: "Get a personalized day-by-day plan based on your goals." },
+    { to: "/coding", mark: "Code", title: "Coding Assistant", text: "Debug code, get explanations, and improve your programming." },
+    { to: "/flashcards", mark: "Cards", title: "Flashcards", text: "AI-generated flashcards with spaced-repetition review." },
+    { to: "/notes", mark: "Notes", title: "Notes Summarizer", text: "Upload a PDF or paste notes to get an instant summary." },
+    { to: "/leaderboard", mark: "Ranks", title: "Leaderboard", text: "See how your points and streak stack up against others." },
+  ];
+
   return (
     <div className="page">
-      <h1>Welcome back, {user?.name?.split(" ")[0]} </h1>
-      <p className="page-subtitle">Here's a snapshot of your study progress.</p>
+      <header className="page-header">
+        <p className="eyebrow">Today</p>
+        <h1>Welcome back, {user?.name?.split(" ")[0]}</h1>
+        <p className="page-subtitle">Here's a snapshot of your study progress.</p>
+      </header>
       {error && <div className="alert-error">{error}</div>}
 
       <div className="stat-grid">
@@ -62,35 +75,15 @@ const Dashboard = () => {
         </div>
       )}
 
+      <p className="section-label">Study tools</p>
       <div className="feature-grid">
-        <Link to="/chat" className="feature-card">
-          <h3>💬 AI Chat</h3>
-          <p>Ask questions and get instant, clear explanations on any topic.</p>
-        </Link>
-        <Link to="/quiz" className="feature-card">
-          <h3>📝 Quiz Generator</h3>
-          <p>Generate custom quizzes on any subject to test your knowledge.</p>
-        </Link>
-        <Link to="/study-plan" className="feature-card">
-          <h3>📅 Study Plan</h3>
-          <p>Get a personalized day-by-day plan based on your goals.</p>
-        </Link>
-        <Link to="/coding" className="feature-card">
-          <h3>💻 Coding Assistant</h3>
-          <p>Debug code, get explanations, and improve your programming.</p>
-        </Link>
-        <Link to="/flashcards" className="feature-card">
-          <h3>🗂️ Flashcards</h3>
-          <p>AI-generated flashcards with spaced-repetition review.</p>
-        </Link>
-        <Link to="/notes" className="feature-card">
-          <h3>📄 Notes Summarizer</h3>
-          <p>Upload a PDF or paste notes to get an instant summary.</p>
-        </Link>
-        <Link to="/leaderboard" className="feature-card">
-          <h3>🏆 Leaderboard</h3>
-          <p>See how your points and streak stack up against others.</p>
-        </Link>
+        {features.map((feature) => (
+          <Link key={feature.to} to={feature.to} className="feature-card">
+            <span className="feature-mark">{feature.mark}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.text}</p>
+          </Link>
+        ))}
       </div>
 
       <div className="recent-section">

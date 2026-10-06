@@ -27,7 +27,21 @@ const Register = () => {
 
   return (
     <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
+      <div className="auth-shell">
+        <aside className="auth-aside">
+          <div>
+            <span className="logo-mark">S</span>
+            <p className="auth-kicker">StudyMate AI</p>
+            <h2>A quieter place to study.</h2>
+            <p>One account for chat, quizzes, coding help, notes, and a plan you can tick off.</p>
+          </div>
+          <ul className="auth-points">
+            <li>Ask questions and keep the thread</li>
+            <li>Turn notes into a short summary</li>
+            <li>Build a streak without a cluttered screen</li>
+          </ul>
+        </aside>
+        <form className="auth-card" onSubmit={handleSubmit}>
         <h1>Create your account</h1>
         <p className="auth-subtitle">Start your personalized AI-powered study journey.</p>
 
@@ -49,7 +63,8 @@ const Register = () => {
         <p className="auth-switch">
           Already have an account? <Link to="/login">Log in</Link>
         </p>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
