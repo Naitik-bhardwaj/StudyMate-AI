@@ -16,6 +16,8 @@ import path from "path"
 
 
 const app = express();
+// Render and similar hosts sit behind a proxy and set X-Forwarded-For.
+app.set("trust proxy", 1);
 
 const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
 app.use(cors({ origin: clientUrl }));
