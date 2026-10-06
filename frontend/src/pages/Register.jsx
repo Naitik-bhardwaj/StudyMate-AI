@@ -27,29 +27,64 @@ const Register = () => {
 
   return (
     <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Create your account</h1>
-        <p className="auth-subtitle">Start your personalized AI-powered study journey.</p>
+      <div className="auth-atmosphere" aria-hidden="true" />
+      <div className="auth-layout">
+        <div className="auth-brand-panel">
+          <div className="auth-brand-mark">
+            <span className="logo-mark" aria-hidden="true" />
+          </div>
+          <p className="auth-brand-name">StudyMate AI</p>
+          <p className="auth-brand-tagline">
+            Build a personalized study rhythm with AI chat, quizzes, and spaced repetition.
+          </p>
+        </div>
 
-        {error && <div className="alert-error">{error}</div>}
+        <form className="auth-card" onSubmit={handleSubmit}>
+          <h1>Create your account</h1>
+          <p className="auth-subtitle">Start your AI-powered study journey.</p>
 
-        <label>Full Name</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+          {error && <div className="alert-error">{error}</div>}
 
-        <label>Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label htmlFor="register-name">Full Name</label>
+          <input
+            id="register-name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            autoComplete="name"
+          />
 
-        <label>Password</label>
-        <input type="password" minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label htmlFor="register-email">Email</label>
+          <input
+            id="register-email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+          />
 
-        <button className="btn-primary" type="submit" disabled={loading}>
-          {loading ? "Creating account..." : "Sign Up"}
-        </button>
+          <label htmlFor="register-password">Password</label>
+          <input
+            id="register-password"
+            type="password"
+            minLength={6}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="new-password"
+          />
 
-        <p className="auth-switch">
-          Already have an account? <Link to="/login">Log in</Link>
-        </p>
-      </form>
+          <button className="btn-primary" type="submit" disabled={loading}>
+            {loading ? "Creating account..." : "Sign Up"}
+          </button>
+
+          <p className="auth-switch">
+            Already have an account? <Link to="/login">Log in</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

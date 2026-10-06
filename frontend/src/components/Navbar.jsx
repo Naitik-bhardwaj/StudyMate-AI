@@ -15,21 +15,22 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <span className="logo-dot" /> StudyMate AI
+        <span className="logo-mark" aria-hidden="true" />
+        StudyMate AI
       </div>
       <div className="navbar-links">
         <NavLink to="/" end>Dashboard</NavLink>
         <NavLink to="/chat">AI Chat</NavLink>
-        <NavLink to="/quiz">Quiz Generator</NavLink>
+        <NavLink to="/quiz">Quiz</NavLink>
         <NavLink to="/study-plan">Study Plan</NavLink>
-        <NavLink to="/coding">Coding Assistant</NavLink>
+        <NavLink to="/coding">Coding</NavLink>
         <NavLink to="/flashcards">Flashcards</NavLink>
         <NavLink to="/notes">Notes</NavLink>
         <NavLink to="/leaderboard">Leaderboard</NavLink>
       </div>
       <div className="navbar-user">
         <span>Hi, {user.name?.split(" ")[0]}</span>
-        <button onClick={handleLogout} className="btn-ghost">Logout</button>
+        <button type="button" onClick={handleLogout} className="btn-ghost">Logout</button>
       </div>
     </nav>
   );

@@ -3,6 +3,51 @@ import { Link } from "react-router-dom";
 import api, { getApiErrorMessage } from "../api/axios.js";
 import { useAuth } from "../context/AuthContext.jsx";
 
+const features = [
+  {
+    to: "/chat",
+    kicker: "Ask",
+    title: "AI Chat",
+    description: "Get clear explanations on any topic in a focused conversation.",
+  },
+  {
+    to: "/quiz",
+    kicker: "Practice",
+    title: "Quiz Generator",
+    description: "Generate custom quizzes on any subject to test what you know.",
+  },
+  {
+    to: "/study-plan",
+    kicker: "Plan",
+    title: "Study Plan",
+    description: "Build a day-by-day plan tuned to your goals and hours.",
+  },
+  {
+    to: "/coding",
+    kicker: "Code",
+    title: "Coding Assistant",
+    description: "Debug, explain, and review code with structured feedback.",
+  },
+  {
+    to: "/flashcards",
+    kicker: "Review",
+    title: "Flashcards",
+    description: "AI decks with spaced-repetition so hard cards return sooner.",
+  },
+  {
+    to: "/notes",
+    kicker: "Summarize",
+    title: "Notes Summarizer",
+    description: "Upload a PDF or paste notes for a concise summary and key points.",
+  },
+  {
+    to: "/leaderboard",
+    kicker: "Compete",
+    title: "Leaderboard",
+    description: "See how your points and streak compare with other learners.",
+  },
+];
+
 const Dashboard = () => {
   const { user } = useAuth();
   const [quizzes, setQuizzes] = useState([]);
@@ -13,8 +58,6 @@ const Dashboard = () => {
   useEffect(() => {
     api.get("/quiz").then((res) => setQuizzes(res.data)).catch((err) => setError(getApiErrorMessage(err, "Could not load dashboard data")));
     api.get("/studyplan").then((res) => setPlans(res.data)).catch((err) => setError(getApiErrorMessage(err, "Could not load dashboard data")));
-    // Points/streak/badges change often — pull the latest instead of relying
-    // on the snapshot cached at login time.
     api.get("/auth/me").then((res) => setFreshStats(res.data.stats)).catch((err) => setError(getApiErrorMessage(err, "Could not load dashboard data")));
   }, []);
 
@@ -24,10 +67,14 @@ const Dashboard = () => {
 
   return (
     <div className="page">
-      <h1>Welcome back, {user?.name?.split(" ")[0]} </h1>
-      <p className="page-subtitle">Here's a snapshot of your study progress.</p>
+      <header className="dash-hero">
+        <h1>Welcome back, {user?.name?.split(" ")[0]}</h1>
+        <p className="page-subtitle">A clear snapshot of your progress — then jump into the next study session.</p>
+      </header>
+
       {error && <div className="alert-error">{error}</div>}
 
+      <p className="section-label">Progress</p>
       <div className="stat-grid">
         <div className="stat-card">
           <span className="stat-value">{stats.quizzesTaken || 0}</span>
@@ -46,14 +93,14 @@ const Dashboard = () => {
           <span className="stat-label">Points</span>
         </div>
         <div className="stat-card">
-          <span className="stat-value">🔥 {stats.studyStreak || 0}</span>
+          <span className="stat-value">{stats.studyStreak || 0}</span>
           <span className="stat-label">Day Streak</span>
         </div>
       </div>
 
       {stats.badges?.length > 0 && (
         <div className="recent-section">
-          <h2>Your Badges</h2>
+          <p className="section-label">Badges</p>
           <div className="badge-row">
             {stats.badges.map((b) => (
               <span key={b} className="badge-chip">{b}</span>
@@ -62,40 +109,20 @@ const Dashboard = () => {
         </div>
       )}
 
+      <p className="section-label">Study tools</p>
       <div className="feature-grid">
-        <Link to="/chat" className="feature-card">
-          <h3>💬 AI Chat</h3>
-          <p>Ask questions and get instant, clear explanations on any topic.</p>
-        </Link>
-        <Link to="/quiz" className="feature-card">
-          <h3>📝 Quiz Generator</h3>
-          <p>Generate custom quizzes on any subject to test your knowledge.</p>
-        </Link>
-        <Link to="/study-plan" className="feature-card">
-          <h3>📅 Study Plan</h3>
-          <p>Get a personalized day-by-day plan based on your goals.</p>
-        </Link>
-        <Link to="/coding" className="feature-card">
-          <h3>💻 Coding Assistant</h3>
-          <p>Debug code, get explanations, and improve your programming.</p>
-        </Link>
-        <Link to="/flashcards" className="feature-card">
-          <h3>🗂️ Flashcards</h3>
-          <p>AI-generated flashcards with spaced-repetition review.</p>
-        </Link>
-        <Link to="/notes" className="feature-card">
-          <h3>📄 Notes Summarizer</h3>
-          <p>Upload a PDF or paste notes to get an instant summary.</p>
-        </Link>
-        <Link to="/leaderboard" className="feature-card">
-          <h3>🏆 Leaderboard</h3>
-          <p>See how your points and streak stack up against others.</p>
-        </Link>
+        {features.map((feature) => (
+          <Link key={feature.to} to={feature.to} className="feature-card">
+            <span className="feature-kicker">{feature.kicker}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </Link>
+        ))}
       </div>
 
       <div className="recent-section">
         <h2>Recent Quizzes</h2>
-        {quizzes.length === 0 && <p className="empty-state">No quizzes yet — generate your first one!</p>}
+        {quizzes.length === 0 && <p className="empty-state">No quizzes yet — generate your first one.</p>}
         <ul className="list">
           {quizzes.slice(0, 5).map((q) => (
             <li key={q._id}>

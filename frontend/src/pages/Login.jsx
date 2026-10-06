@@ -26,26 +26,53 @@ const Login = () => {
 
   return (
     <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Welcome back</h1>
-        <p className="auth-subtitle">Log in to continue studying smarter.</p>
+      <div className="auth-atmosphere" aria-hidden="true" />
+      <div className="auth-layout">
+        <div className="auth-brand-panel">
+          <div className="auth-brand-mark">
+            <span className="logo-mark" aria-hidden="true" />
+          </div>
+          <p className="auth-brand-name">StudyMate AI</p>
+          <p className="auth-brand-tagline">
+            Your calm study desk for quizzes, plans, flashcards, and focused AI help.
+          </p>
+        </div>
 
-        {error && <div className="alert-error">{error}</div>}
+        <form className="auth-card" onSubmit={handleSubmit}>
+          <h1>Welcome back</h1>
+          <p className="auth-subtitle">Log in to continue studying smarter.</p>
 
-        <label>Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          {error && <div className="alert-error">{error}</div>}
 
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label htmlFor="login-email">Email</label>
+          <input
+            id="login-email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+          />
 
-        <button className="btn-primary" type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Log In"}
-        </button>
+          <label htmlFor="login-password">Password</label>
+          <input
+            id="login-password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="current-password"
+          />
 
-        <p className="auth-switch">
-          Don't have an account? <Link to="/register">Sign up</Link>
-        </p>
-      </form>
+          <button className="btn-primary" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Log In"}
+          </button>
+
+          <p className="auth-switch">
+            Don't have an account? <Link to="/register">Sign up</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };
