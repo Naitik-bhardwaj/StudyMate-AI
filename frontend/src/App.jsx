@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Login from "./pages/Login.jsx";
@@ -13,10 +13,13 @@ import Notes from "./pages/Notes.jsx";
 import Leaderboard from "./pages/Leaderboard.jsx";
 
 function App() {
+  const { pathname } = useLocation();
+  const isAuth = pathname === "/login" || pathname === "/register";
+
   return (
     <>
       <Navbar />
-      <main className="app-main">
+      <main className={isAuth ? "app-main auth-shell" : "app-main"}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
