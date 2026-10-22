@@ -1,4 +1,4 @@
-# StudyMate AI — AI Study Assistant (Final Year Project)
+# StudyMate AI — AI Study Assistant 
 
 A full-stack MERN application (MongoDB, Express, React, Node.js) that uses Groq's API
 to power an AI study assistant with chat, quiz generation, personalized study plans,
