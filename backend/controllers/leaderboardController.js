@@ -9,7 +9,6 @@ export const getLeaderboard = async (req, res, next) => {
       .select("name stats.points stats.studyStreak stats.badges")
       .sort({ "stats.points": -1 })
       .limit(20);
-
     const leaderboard = topUsers.map((u, i) => ({
       rank: i + 1,
       userId: u._id,
