@@ -78,6 +78,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = Number(process.env.PORT) || 5000;
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const connectWithRetry = async () => {
